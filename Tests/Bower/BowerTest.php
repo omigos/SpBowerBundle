@@ -263,10 +263,13 @@ class BowerTest extends AbstractBowerTest
 
     public function componentsProvider()
     {
-        return array(
-            array(self::$fixturesDirectory .'/config'),
-            array(new DirectoryResource('test')),
-        );
+        $components = [[self::$fixturesDirectory .'/config']];
+        try {
+            $components[] = [new DirectoryResource('test')];
+        } catch (\InvalidArgumentException $e) {
+
+        }
+        return $components;
     }
 
 }
